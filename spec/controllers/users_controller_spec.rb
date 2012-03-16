@@ -24,7 +24,7 @@ describe UsersController do
   # User. As you add validations to User, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {:first_name => "First", :last_name => "Last", :email => "user@example.com"}
   end
 
   describe "GET index" do

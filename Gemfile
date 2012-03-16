@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.2'
 
 #gem 'sqlite3'
 gem 'pg'
@@ -28,11 +28,11 @@ gem 'jquery-rails'
 group :development do
   # To use debugger
   gem 'ruby-debug19', :require => 'ruby-debug'
-  gem 'rspec-rails', '2.6.1'
+  gem 'rspec-rails','2.8.1'
 end
 
 group :test do
-  gem 'rspec-rails', '2.6.1'
+  gem 'rspec-rails','2.8.1'
   gem 'webrat', '0.7.1'
 end
 
