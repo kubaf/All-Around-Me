@@ -1,4 +1,8 @@
 AllAroundMe::Application.routes.draw do
+  get "pages/home"
+
+  get "pages/contact"
+
   resources :users
 
   match '/signup', :to => 'users#new'

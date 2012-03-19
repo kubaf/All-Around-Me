@@ -19,6 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe UsersController do
+  render_views
 
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
@@ -31,6 +32,8 @@ describe UsersController do
     :password_confirmation => "foobar"
     }
   end
+  
+  
 
   describe "GET index" do
     it "assigns all users as @users" do
@@ -46,6 +49,8 @@ describe UsersController do
       get :show, :id => user.id.to_s
       assigns(:user).should eq(user)
     end
+    
+    
   end
 
   describe "GET new" do
