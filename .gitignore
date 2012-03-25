@@ -15,3 +15,4 @@
 /tmp
 .rvm*
 .rspec
+.DS_Store
