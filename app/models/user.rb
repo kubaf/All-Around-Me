@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     return nil if user.nil?
     return user if user.has_password?(password)
   end
+  
+  def name
+    return "#{:first_name} #{:last_name}"
+  end
 
 private
 
