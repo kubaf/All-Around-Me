@@ -2,35 +2,32 @@
 <html>
 <head>
   <title><%= full_title(yield(:title)) %></title>
-
-  <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
-  <%= stylesheet_link_tag 'blueprint/print',  :media => 'print' %>
-  <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
-  <%= stylesheet_link_tag 'custom', :media => 'screen' %>
-
-<!-- 
-  <%= stylesheet_link_tag    "application", :media => "screen" %>
--->
+  <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <header>
-      <% logo = image_tag("logo.gif", :alt => "All Around Me", :class => "") %>
-      <%= link_to logo, root_path %>
-      <nav class="round">
-        <ul>
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Help", help_path %></li>
-          <li><%= link_to "Sign in", '#' %></li>
-        </ul>
-      </nav>
+    <header class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <nav>
+            <% logo = image_tag("logo-multirate.png", :alt => "Multirate.Me", :class => "logo") %>
+            <%= link_to logo, root_path %>
+            <ul class="nav pull-right">
+              <li><%= link_to "Home", root_path %></li>
+              <li><%= link_to "Help", help_path %></li>
+              <li><%= link_to "Sign in", '#' %></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </header>
     
     
-    <section class="round">
+    <div class="container">
       <%= yield %>
     </section>
   
