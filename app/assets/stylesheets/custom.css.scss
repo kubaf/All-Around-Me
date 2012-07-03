@@ -96,3 +96,34 @@ p {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #eee;
+}
+
+footer a {
+  color: #555;
+}  
+
+footer a:hover { 
+  color: #eee;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 10px;
+}
+
