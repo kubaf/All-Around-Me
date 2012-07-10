@@ -12,17 +12,19 @@
 <body>
     <header class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-<!--        <div class="container"> -->
+        <div class="container"> 
           <nav>
             <% logo = image_tag("logo-multirate.png", :alt => "Multirate.Me", :class => "logo") %>
             <%= link_to logo, root_path %>
-            <ul class="nav pull-right">
-              <li><%= link_to "Home", root_path %></li>
-              <li><%= link_to "Help", help_path %></li>
-              <li><%= link_to "Sign in", '#' %></li>
-            </ul>
+<!--            <div class="nav-collapse"> -->
+              <ul class="nav pull-right">
+                <li <%= nav_class(root_path) %>><%= link_to "Home", root_path %></li>
+                <li <%= nav_class(help_path) %>><%= link_to "Help", help_path %></li>
+                <li <%= nav_class(nil) %>><%= link_to "Sign in", '#' %></li>
+              </ul>
+<!--            </div> -->
           </nav>
-    <!--    </div> -->
+        </div> 
       </div>
     </header>
     
