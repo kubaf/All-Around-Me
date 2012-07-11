@@ -20,8 +20,13 @@ class User < ActiveRecord::Base
                         :confirmation => true,
                         :length => {:within => 6..254}
                         
+  validates :password_confirmation, presence: true
                         
-  before_save :encrypt_password
+  before_save :encrypt_password, :downcase_email
+  
+  def downcase_email
+    email.downcase
+  end
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
