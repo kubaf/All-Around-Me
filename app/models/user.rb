@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
                         :length => {:within => 6..254}
                         
   validates :password_confirmation, presence: true
+  
+  # Adds authenticate method
+  has_secure_password
                         
   before_save :encrypt_password, :downcase_email
   
@@ -32,11 +35,11 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
   
-  def self.authenticate(email, password)
-    user = find_by_email(email)
-    return nil if user.nil?
-    return user if user.has_password?(password)
-  end
+#  def self.authenticate(email, password)
+#    user = find_by_email(email)
+#    return nil if user.nil?
+#    return user if user.has_password?(password)
+#  end
   
   def name
     return "#{first_name} #{last_name}"

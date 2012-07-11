@@ -4,6 +4,7 @@ gem 'rails', '3.2.6'
 
 gem 'gravatar_image_tag','1.0.0.pre2'
 gem 'bootstrap-sass','2.0.4.0'
+gem 'bcrypt-ruby','3.0.1'
 gem 'jquery-rails'
 
 group :production do
