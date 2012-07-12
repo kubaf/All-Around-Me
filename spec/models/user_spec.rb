@@ -19,7 +19,7 @@ describe User do
   it {should respond_to(:email)}
   it {should respond_to(:first_name)}
   it {should respond_to(:last_name)}
-  it {should respond_to(:encrypted_password)}
+  it {should respond_to(:password_digest)}
   it {should respond_to(:password)}
   it {should respond_to(:password_confirmation)}
   it {should respond_to(:authenticate)}
@@ -30,20 +30,20 @@ describe User do
   
   describe "authenticate method" do
     
-    it "should return nil on email/password mismatch" do
-      wrong_password_user = User.authenticate(@attr[:email], "wrong password")
-      wrong_password_user.should be_nil
+    before {@user.save}
+    let(:found_user) {User.find_by_email(@user.email)}
+    
+    describe "with valid password" do
+      it {should == found_user.authenticate(@user.password)}
     end
     
-    it "should return nil for an email address with no user" do
-      nonexistent_user = User.authenticate("random@email.com",@attr[:password])
-      nonexistent_user.should be_nil
+    describe "with invalid password" do
+      let(:user_for_invalid_password) {found_user.authenticate("invalid")}
+      
+      it {should_not == user_for_invalid_password}
+      specify {user_for_invalid_password.should be_false}
     end
     
-    it "should return the user on email/password match" do
-      matching_user = User.authenticate(@attr[:email], @attr[:password])
-      matching_user.should == @user
-    end
     
   end
   
@@ -55,9 +55,9 @@ describe User do
     
     describe "password validations" do
 
-      it "should require a password" do
-        User.new(@attr.merge(:password => "", :password_confirmation => "")).
-          should_not be_valid
+      describe "when password is not present" do
+        before {@user.password = @user.password_confirmation = ""}
+        it {should_not be_valid}
       end
       
       describe "when password is blank" do
@@ -70,10 +70,11 @@ describe User do
         it {should_not be_valid}
       end
 
-      it "should require a matching password confirmation" do
-        User.new(@attr.merge(:password_confirmation => "invalid")).
-          should_not be_valid
+      describe "when password confirmation does not match pasword" do
+        before {@user.password_confirmation = "mismatch"}
+        it {should_not be_valid}
       end
+
 
       it "should reject short passwords" do
         short = "a" * 5
