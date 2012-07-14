@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # https://github.com/rails/rails/blob/master/activemodel/lib/active_model/secure_password.rb
   has_secure_password
 
-  before_save { |user| user.email = email.downcase }
+  before_save { self.email.downcase! }
 
 
   validates :first_name,  :presence=>true,
