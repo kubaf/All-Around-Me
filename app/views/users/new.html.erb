@@ -1,9 +1,14 @@
 <% provide(:title,'Sign Up')%>
-<div class="hero-unit">
+
+<div class="center hero-unit">
   <h1>Sign Up</h1>
   <p>Please sign up to get started with your reviews.</p>
 </div>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= render 'form' %>
+  </div>
+</div>
 
 <%= link_to 'Back', users_path %>
