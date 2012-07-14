@@ -19,6 +19,8 @@
 <!--            <div class="nav-collapse"> -->
               <ul class="nav pull-right">
                 <li <%= nav_class(root_path) %>><%= link_to "Home", root_path %></li>
+                <li <%= nav_class(about_path) %>><%= link_to "About", about_path %></li>
+                <li <%= nav_class(contact_path) %>><%= link_to "Contact", contact_path %></li>
                 <li <%= nav_class(help_path) %>><%= link_to "Help", help_path %></li>
                 <li <%= nav_class(nil) %>><%= link_to "Sign in", '#' %></li>
               </ul>
@@ -31,17 +33,20 @@
     
     <div class="container main-container">
       <%= yield %>
+      
+          <footer>
+            <div class="container"> 
+              <nav>
+                <ul>
+                  <li><%= link_to "About", about_path %></li>
+                  <li><%= link_to "Contact", contact_path %></li>
+                </ul>
+              </nav>
+            </div>
+          </footer>
+      <%= debug(params) if Rails.env.development? %>
+      
     </div>
   
-    <footer>
-      <nav>
-        <ul>
-          <li><%= link_to "About", about_path %></li>
-          <li><%= link_to "Contact", contact_path %></li>
-        </ul>
-      </nav>
-    </footer>
-  </div>
-<%= debug(params) if Rails.env.development? %>
 </body>
 </html>
