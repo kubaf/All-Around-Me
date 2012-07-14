@@ -3,7 +3,7 @@ require 'digest'
 # User.create!(first_name: "Kuba", last_name: "FSomething", email: "abc@def.com", password: "foobar", password_confirmation: "foobar")
 class User < ActiveRecord::Base
   
-  attr_accessible :first_name, :last_name, :email, :admin, :password, :password_confirmation
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
 
   # Adds authenticate method among other things
   # https://github.com/rails/rails/blob/master/activemodel/lib/active_model/secure_password.rb

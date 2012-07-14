@@ -47,11 +47,6 @@ describe UsersController do
       assigns(:user).should eq(user)
     end
     
-    it "should include the user's name" do
-      get :show,:id=>@user.id
-      response.should have_selector("h1",:content=>@user.name)
-    end
-    
   end
 
   describe "GET 'new'" do

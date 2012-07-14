@@ -1,6 +1,20 @@
-<% provide(:title, "Sign Up") %>
+<% provide(:title, @user.name) %>
 
 <p id="notice"><%= notice %></p>
+
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+
+
+
 
 <table class="profile" summary="Profile Information">
   <tr>
@@ -14,7 +28,6 @@
       <strong>First name:</strong>  <%= @user.first_name %><br />
       <strong>Last name:</strong>  <%= @user.last_name %><br />
       <strong>Email:</strong>  <%= @user.email %><br />
-      <strong>Admin</strong>  <%= @user.admin %><br />
       <strong>URL</strong>  <%= link_to user_path(@user), @user %>
     </td>
   </tr>  
