@@ -190,8 +190,9 @@ aside {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
+/* Override bootstrap to account for bigger nav */
 .main-container {
-  padding-top: 20px;
+  padding-top: 70px;
 }
 
 
