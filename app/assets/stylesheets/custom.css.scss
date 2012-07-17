@@ -190,6 +190,14 @@ aside {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
+#current_user img {
+    border: 2px solid #FFFFFF;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 1px #444444;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
 /* Override bootstrap to account for bigger nav */
 .main-container {
   padding-top: 80px;
