@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   before_save { self.email.downcase! }
+  before_save :generate_session_token
 
 
   validates :first_name,  :presence=>true,
@@ -31,6 +32,12 @@ class User < ActiveRecord::Base
   def name
     return "#{first_name} #{last_name}"
   end
+  
+  private
+  
+    def generate_session_token
+      self.session_token = SecureRandom.urlsafe_base64
+    end
 
 
 end
