@@ -13,7 +13,7 @@
           <ul id="current_user" class="nav pull-right">            
             <% if signed_in? %>
               <li <%= nav_class(nil) %>><%= link_to "Users", '#' %></li>
-              <li id="fat-menu" class="dropdown">
+              <li id="fat-menu" <%= nav_class(user_path(@current_user),"dropdown")%> >
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <%= gravatar_for @current_user, size: 18 %>
                   <%= @current_user.name %><b class="caret"></b>
@@ -26,7 +26,7 @@
                 </ul>
               </li>
             <% else %>
-              <li <%= nav_class(nil) %>><%= link_to "Sign in", '#' %></li>
+              <li <%= nav_class(nil) %>><%= link_to "Sign in", signin_path %></li>
             <% end %>
           </ul>
       </nav>
