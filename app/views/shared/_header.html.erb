@@ -13,14 +13,14 @@
           <ul id="current_user" class="nav pull-right">            
             <% if signed_in? %>
               <li <%= nav_class(nil) %>><%= link_to "Users", '#' %></li>
-              <li id="fat-menu" <%= nav_class(user_path(@current_user),"dropdown")%> >
+              <li id="fat-menu" <%= nav_class(nil,"dropdown")%> >
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <%= gravatar_for @current_user, size: 18 %>
                   <%= @current_user.name %><b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                   <li><%= link_to "Profile", current_user %></li>
-                  <li><%= link_to "Settings", '#' %></li>
+                  <li><%= link_to "Edit Profile", edit_user_path(@current_user) %></li>
                   <li class="divider"></li>
                   <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
                 </ul>

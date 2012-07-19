@@ -1,6 +1,23 @@
-<h1>Editing user</h1>
+<% provide(:title,'Edit Profile')%>
 
-<%= render 'form' %>
+<ul class="breadcrumb">
+  <li>
+    <a href="#"><%= @user.name %></a> 
+    <span class="divider">/</span>
+  </li>
+  <li class="active">Edit Profile</li>
+</ul>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="page-header">
+  <h1 id="profile">
+    <%= gravatar_for @user %>
+    <%= @user.name %>
+  </h1>
+  <a href="http://gravatar.com/emails" target="_blank">[ change image ]</a>
+</div>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= render 'edit_form' %>
+  </div>
+</div>
