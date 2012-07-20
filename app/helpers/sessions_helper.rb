@@ -29,13 +29,27 @@ module SessionsHelper
     user == current_user
   end
   
+  # filter that checks if user is allowed to execute on a particular action
   def signed_in_user
-    redirect_to signin_path, notice: "You must be signed in to perform this action." unless signed_in?
+    unless signed_in?
+      store_location
+      redirect_to signin_path, notice: "You must be signed in to perform this action." 
+    end
   end
   
+  # filter that checks that user only executes actions against their own data
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_path) unless current_user?(@user)
+  end
+  
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+  
+  def store_location
+    session[:return_to] = request.fullpath
   end
   
 end
