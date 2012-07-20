@@ -25,4 +25,8 @@ module SessionsHelper
     @current_user ||= User.find_by_session_token(session[:session_token])
   end
   
+  def signed_in_user
+    redirect_to signin_path, notice: "You must be signed in to perform this action." unless signed_in?
+  end
+  
 end

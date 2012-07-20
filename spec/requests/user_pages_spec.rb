@@ -57,7 +57,10 @@ describe "User pages" do
   
   describe "edit" do
     let(:user) {Factory.create(:user)}
-    before {visit edit_user_path(user)}
+    before do 
+      sign_in user
+      visit edit_user_path(user)
+    end
     
     describe "page" do
       it {should have_link('change', href: 'http://gravatar.com/emails')}
