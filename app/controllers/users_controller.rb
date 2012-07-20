@@ -61,7 +61,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'Update successful!' }
+        # Changes to user model reset the session_token 
+        # invalidating the session so need to sign in again
+        sign_in @user 
+        format.html { redirect_to @user, flash: {success: 'Update successful!'} }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -2,7 +2,8 @@ module SessionsHelper
   
   # half hour cookie sign in session
   def sign_in(user)
-    cookies[:session_token] = {value: user.session_token, expires: Time.now + 30.minutes}
+    #cookies[:session_token] = {value: user.session_token, expires: Time.now + 30.minutes}
+    session[:session_token] = user.session_token
     self.current_user = user
   end
   
@@ -12,7 +13,7 @@ module SessionsHelper
   
   def sign_out
     self.current_user = nil
-    cookies.delete(:session_token)
+    session.delete(:session_token)
   end
     
   
@@ -21,7 +22,7 @@ module SessionsHelper
   end
   
   def current_user
-    @current_user ||= User.find_by_session_token(cookies[:session_token])
+    @current_user ||= User.find_by_session_token(session[:session_token])
   end
   
 end
