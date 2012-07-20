@@ -60,8 +60,27 @@ describe "Authentication" do
             specify {response.should redirect_to(signin_path)}
           end
         end
-      
     end
     
+    describe "as wrong user" do
+      let(:user) {Factory.create(:user)}
+      let(:wrong_user) {Factory.create(:user, email: "wrong@email.com")}
+      before {sign_in user}
+      
+      describe "visiting Users#edit page" do
+        before {visit edit_user_path(wrong_user)}
+        it {should_not have_selector('title', text: "Edit Profile")}
+      end
+      
+      # I don't know how to make this test work
+#      describe "submitting a put request to the Users#update action" do 
+#        before do
+#          sign_in user
+#          visit edit_user_path(user)
+#          put user_path(wrong_user)
+#        end
+#        specify {response.should redirect_to(root_path)}
+#      end
+    end
   end
 end
