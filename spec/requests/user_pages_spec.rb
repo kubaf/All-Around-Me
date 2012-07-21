@@ -4,6 +4,22 @@ require 'pp'
 describe "User pages" do
 
   subject { page }
+  
+  describe "index" do
+    before do
+      sign_in Factory.create(:user)
+      Factory.create(:user, first_name: "Jen", last_name: "One", email: "jen@one.com")
+      Factory.create(:user, first_name: "Joe", last_name: "Two", email: "joe@two.com")
+      visit users_path
+    end
+    
+    it {should have_selector('title', text: "All users")}
+    it "should list each user" do
+      User.all.each do |user|
+        page.should have_selector('li', text: user.name)
+      end
+    end
+  end
 
   describe "signup page" do
     before { visit signup_path }

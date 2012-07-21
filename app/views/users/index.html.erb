@@ -1,28 +1,11 @@
-<h1>Listing users</h1>
+<% provide(:title, 'All users') %>
+<h1>All users</h1>
 
-<table>
-  <tr>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Email</th>
-    <th>Admin</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.first_name %></td>
-    <td><%= user.last_name %></td>
-    <td><%= user.email %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, data: {confirm: 'Are you sure?'}, method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New User', new_user_path %>
+<ul class="users">
+  <% @users.each do |user| %>
+    <li>
+      <%= gravatar_for user, size: 52 %>
+      <%= link_to user.name, user %>
+    </li>
+  <% end %>
+</ul>

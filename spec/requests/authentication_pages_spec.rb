@@ -31,6 +31,7 @@ describe "Authentication" do
       let(:user) {Factory.create(:user)}
       before { sign_in user }
       
+      it { should have_link('Users',    href: users_path) }
       it {should have_selector('title', text: user.name)}
       it {should have_link('Profile', href: edit_user_path(user))}
       it {should have_link('Sign out', href: signout_path)}
@@ -53,6 +54,11 @@ describe "Authentication" do
           describe "visiting the edit page" do
             before {visit edit_user_path(user)}
             it {should have_selector('title', text: 'Sign In')}            
+          end
+          
+          describe "visiting the user index" do
+            before {visit users_path}
+            it {should have_selector('title', text: 'Sign In')}
           end
           
           describe "submitting to the update action" do
