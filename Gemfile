@@ -15,6 +15,7 @@ group :development, :test do
 # gem 'sqlite3'
   gem 'mysql2'
   gem 'rspec-rails','2.8.1'
+  gem 'faker', '1.0.1'
 end
 
 # Gems used only for assets and not required
