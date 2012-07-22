@@ -93,7 +93,7 @@ describe "Authentication" do
         it {should_not have_selector('title', text: "Edit Profile")}
       end
       
-      # I don't know how to make this test work
+      # I don't know how to make these tests work
 #      describe "submitting a put request to the Users#update action" do 
 #        before do
 #          sign_in user
@@ -103,5 +103,18 @@ describe "Authentication" do
 #        specify {response.should redirect_to(root_path)}
 #      end
     end
+    
+#    describe "as a non-admin user" do
+#      let(:user) {Factory.create(:user)}
+#      let(:non_admin) {Factory.create(:user)}
+#      
+#      before {sign_in non_admin}
+#      
+#     describe "submitting a DELETE request to the Users#destroy action" do
+#        before {delete user_path(user)}
+#        specify {response.should redirect_to(root_path)}
+#      end
+#    end
+    
   end
 end
