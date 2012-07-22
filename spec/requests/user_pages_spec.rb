@@ -48,10 +48,10 @@ describe "User pages" do
     end
   end
 
-  describe "signup page" do
-    before { visit signup_path }
+  describe "registration page" do
+    before { visit register_path }
    
-    it { should have_selector('h1',    text: 'Sign Up') }
+    it { should have_selector('h1',    text: 'Register') }
   end
   
   describe "profile page" do
@@ -62,8 +62,8 @@ describe "User pages" do
     it { should have_selector('title', text: user.name) }
   end
   
-  describe "signup" do
-    before {visit signup_path}
+  describe "register" do
+    before {visit register_path}
     
     let(:submit) { "Create Account"}
     
