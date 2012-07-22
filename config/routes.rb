@@ -1,5 +1,7 @@
 AllAroundMe::Application.routes.draw do
 
+  resources :dashboards, only: [:show]
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
