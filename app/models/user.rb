@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   # Adds authenticate method among other things
   # https://github.com/rails/rails/blob/master/activemodel/lib/active_model/secure_password.rb
   has_secure_password
+  
+  has_many :reviews
 
   before_save { self.email.downcase! }
   before_save :generate_session_token

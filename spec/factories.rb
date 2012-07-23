@@ -10,4 +10,10 @@ FactoryGirl.define do
       admin true
     end
   end
+  
+  factory :review do
+    sequence(:name) { |n| "User review #{n}"}
+    status "active"
+    user
+  end
 end
