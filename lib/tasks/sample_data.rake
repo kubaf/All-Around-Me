@@ -23,6 +23,11 @@ namespace :db do
         password_confirmation: password
       )
     end
+    
+    users = User.all(limit: 6)
+    5.times do
+      users.each {|user| user.reviews.create!(name: user.name, status: "active")}
+    end
   end
 end
       

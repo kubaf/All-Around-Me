@@ -12,12 +12,20 @@
   <h1>Dashboard</h1>
 </div>
 
-<div class="well">
-  <h1>My Reviews</h1>
-  <p>List of reviews goes here</p>
-</div>
+<div class="row">
+  <div class="span8">
+    <div class="well">
+      <h2>My Reviews <small>Reviews of me</small></h2>
+      <% if @user.reviews.any? %>
+        <ol class="reviews">
+          <%= render @reviews %>
+        </ol>
+      <% end %>
+    </div>
 
-<div class="well">
-  <h1>Reviewing</h1>
-  <p>List of other's reviews goes here</p>
+    <div class="well">
+      <h2>Reviewing <small>Who I am reviewing</small></h2>
+
+    </div>
+  </div>
 </div>

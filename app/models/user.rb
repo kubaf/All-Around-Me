@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # https://github.com/rails/rails/blob/master/activemodel/lib/active_model/secure_password.rb
   has_secure_password
   
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   before_save { self.email.downcase! }
   before_save :generate_session_token

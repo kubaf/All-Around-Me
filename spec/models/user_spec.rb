@@ -149,4 +149,28 @@ describe User do
     end
   end
   
+  
+  describe "review associations" do
+    
+    before {@user.save}
+    let!(:older_review) do
+      Factory.create(:review, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_review) do
+      Factory.create(:review, user: @user, created_at: 1.hour.ago)
+    end
+    
+    it "should have the right reviews in the right order" do
+      @user.reviews.should == [newer_review, older_review]
+    end
+  end
+  
+  it "should destroy associated reviews" do
+    reviews = @user.reviews
+    @user.destroy
+    reviews.each do |review|
+      Review.find_by_id(review.id).should be_nil
+    end
+  end
+  
 end

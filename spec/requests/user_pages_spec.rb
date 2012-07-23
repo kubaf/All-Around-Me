@@ -54,13 +54,32 @@ describe "User pages" do
     it { should have_selector('h1',    text: 'Register') }
   end
   
+  
+  
+  
+  
   describe "profile page" do
     let(:user) { Factory.create(:user) }
+    let!(:r1) {Factory.create(:review, user: user, name: "review1")}
+    let!(:r2) {Factory.create(:review, user: user, name: "review2")}
+    
+    
     before { visit user_path(user) }
 
     it { should have_selector('h1',    text: user.name) }
     it { should have_selector('title', text: user.name) }
+    
+    describe "reviews" do
+      it {should have_content(r1.name)}
+      it {should have_content(r2.name)}
+    end
+    
+    
   end
+  
+  
+  
+  
   
   describe "register" do
     before {visit register_path}
