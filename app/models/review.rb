@@ -1,5 +1,5 @@
 class Review < ActiveRecord::Base
-  attr_accessible :name, :status
+  attr_accessible :name, :status, :created_at
   
   belongs_to :user
   
