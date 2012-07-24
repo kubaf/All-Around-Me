@@ -19,6 +19,7 @@
       <% if @user.reviews.any? %>
         <ol class="reviews">
           <%= render @reviews %>
+          <li><button class="btn btn-primary">Create +</button>
         </ol>
       <% end %>
     </div>
