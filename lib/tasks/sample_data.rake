@@ -25,9 +25,14 @@ namespace :db do
     end
     
     users = User.all(limit: 6)
-    5.times do |i|
-      users.each {|user| user.reviews.create!(name: "#{user.name} #{i}", created_at: i.years.ago, status: "active")}
-    end
+    users.each do |user|
+      period = Date.today
+      user.reviews.create!(name: "#{user.name} review #{period}", created_at: period, status: "active")
+      period = 1.year.ago
+      user.reviews.create!(name: "#{user.name} review #{period}", created_at: period, status: "completed")
+      period = 2.years.ago
+      user.reviews.create!(name: "#{user.name} review #{period}", created_at: period, status: "completed") 
+    end 
   end
 end
       

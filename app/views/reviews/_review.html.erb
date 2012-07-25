@@ -1,6 +1,23 @@
-<li>
-  <span class="content"><%= review.name %></span>
-  <span class="timestamp">
-    Started <%= time_ago_in_words(review.created_at) %> ago.
-  </span>
+<li class="review-row">
+  <div class="pull-left">
+    <div class="content"><%= review.name %></div>
+    <% if review.status == "active"%>
+      <div class="timestamp">
+        Expires in <%= distance_of_time_in_words(review.created_at, review.created_at + 7.days) %>.
+      </div>
+    <% end %>
+  </div>
+  <div class="pull-right">
+    <div class="btn-group">
+      <button class="btn"><%= review.status.humanize %></button>
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#">Edit</a>
+        </li>
+      </ul>
+    </div>
+  <div>
 </li>
