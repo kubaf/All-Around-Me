@@ -1,9 +1,9 @@
 <li class="review-row">
   <div class="pull-left">
     <div class="content"><%= review.name %></div>
-    <% if review.status == "active"%>
+    <% if review.active? %>
       <div class="timestamp">
-        Expires in <%= distance_of_time_in_words(review.created_at, review.created_at + 7.days) %>.
+        Expires in <%= distance_of_time_in_words(Time.now, review.expiry) %>.
       </div>
     <% end %>
   </div>

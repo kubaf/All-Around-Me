@@ -7,6 +7,7 @@ class ReviewsController < ApplicationController
       format.html { redirect_to dashboard_path, flash: {success: 'Review created!'}}
     else
       format.html { render action: "new" }
+    end
   end
   
   def new

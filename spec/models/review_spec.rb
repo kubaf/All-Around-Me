@@ -16,6 +16,8 @@ describe Review do
   
   it {should respond_to(:name)}
   it {should respond_to(:status)}
+  it {should respond_to(:status_dt)}
+  it {should respond_to(:duration)}
   it {should respond_to(:user)}
   its(:user) {should == user}
   

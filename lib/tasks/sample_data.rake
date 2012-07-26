@@ -26,12 +26,25 @@ namespace :db do
     
     users = User.all(limit: 6)
     users.each do |user|
-      period = Date.today
-      user.reviews.create!(name: "#{user.name} review #{period}", created_at: period, status: "active")
-      period = 1.year.ago
-      user.reviews.create!(name: "#{user.name} review #{period}", created_at: period, status: "completed")
-      period = 2.years.ago
-      user.reviews.create!(name: "#{user.name} review #{period}", created_at: period, status: "completed") 
+      # Pending
+      created = Date.today
+      status_date = Date.today
+      duration = 14
+      user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "pending", status_dt: status_date, duration: duration, created_at: created)
+      
+      # Active
+      created = Date.today - 9.days
+      status_date = Date.today - 6.days
+      user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "active", status_dt: status_date, duration: duration, created_at: created)
+      
+      # Completed
+      created = status_date = 1.year.ago
+      user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "completed", status_dt: status_date, duration: duration, created_at: created)
+      
+      # Completed
+      created = status_date = 2.years.ago
+      user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "expired", status_dt: status_date, duration: duration, created_at: created)
+
     end 
   end
 end
