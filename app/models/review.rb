@@ -4,6 +4,9 @@ class Review < ActiveRecord::Base
   belongs_to :user
   
   validates :user_id, presence: true
+  validates :name, presence: true, length: {:maximum =>50}
+
+  
   
   default_scope order: 'reviews.created_at DESC'
   
@@ -16,5 +19,11 @@ class Review < ActiveRecord::Base
       status_dt + (duration ? duration : 14).days
     end
   end
+  
+  def update_status(to)
+    self.status = to
+    self.status_dt = Time.now
+  end
+
   
 end

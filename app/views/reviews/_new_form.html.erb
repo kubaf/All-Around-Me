@@ -1,0 +1,9 @@
+<%= form_for(@review, html: {class: "well"}) do |f| %>
+  <%= render 'fields', f: f %>
+  
+  
+  <div class="form-actions">
+    <%= f.submit "Create Review", class: "btn btn-primary" %>
+    <%= f.button "Cancel", class: "btn" %>
+  </div>
+<% end %>
