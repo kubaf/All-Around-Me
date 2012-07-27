@@ -14,6 +14,8 @@ FactoryGirl.define do
   factory :review do
     sequence(:name) { |n| "User review #{n}"}
     status "active"
+    status_dt Time.now
+    duration 14
     user
   end
 end

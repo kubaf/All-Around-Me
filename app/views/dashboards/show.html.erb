@@ -19,7 +19,9 @@
       <% if @user.reviews.any? %>
         <ol class="reviews">
           <%= render @reviews %>
-          <li><button class="btn btn-primary">Create +</button>
+          <li>
+            <%= link_to "Create +", new_review_path, class: "btn btn-primary" %>
+          </li>
         </ol>
       <% end %>
     </div>
