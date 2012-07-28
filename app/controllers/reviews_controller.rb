@@ -1,10 +1,10 @@
 class ReviewsController < ApplicationController
   before_filter :signed_in_user
+  before_filter :correct_review
   
   def create
     @review = current_user.reviews.build(params[:review])
     @review.update_status('pending')
-pp @review
     
     if @review.save
       respond_to do |format|
@@ -22,6 +22,7 @@ pp @review
   end
   
   def edit
+    @review = current_user.reviews.find(params[:id])
   end
   
   

@@ -43,6 +43,12 @@ module SessionsHelper
     redirect_to(root_path) unless current_user?(@user)
   end
   
+  # filter that only allows you to edit your own reviews
+  def correct_review
+    @review = Review.find(params[:id])
+    redirect_to(root_path) unless current_user?(@review.user)
+  end
+  
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     session.delete(:return_to)
