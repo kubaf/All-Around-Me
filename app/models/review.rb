@@ -4,7 +4,10 @@ class Review < ActiveRecord::Base
   belongs_to :user
   
   validates :user_id, presence: true
-  validates :name, presence: true, length: {:maximum =>50}
+  validates :name, presence: true, length: {maximum: 50}
+  validates :duration, presence: true
+  validates_numericality_of :duration, only_integer: true, message: "can only be a whole number"
+  validates_inclusion_of :duration, in: 1..31, message: "can only be between 1 and 31 days"
 
   
   
