@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :correct_review
+  before_filter :correct_review, only: [:edit, :update]
   
   def create
     @review = current_user.reviews.build(params[:review])
@@ -23,6 +23,16 @@ class ReviewsController < ApplicationController
   
   def edit
     @review = current_user.reviews.find(params[:id])
+  end
+  
+  def update
+    respond_to do |format|
+      if @review.update_attributes(params[:review])
+        format.html { redirect_to dashboard_path(@current_user), flash: {success: 'Review changes saved!'} }
+      else
+        format.html { render action: "edit" }
+      end
+    end
   end
   
   
