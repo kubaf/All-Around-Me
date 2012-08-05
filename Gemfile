@@ -40,6 +40,7 @@ end
 group :development do
   # To use debugger
   gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'annotate', '2.4.0'
 end
 
 group :test do
