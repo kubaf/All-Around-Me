@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  status     :string(255)
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  status_dt  :datetime
+#  duration   :integer
+#
+
 require 'spec_helper'
 
 describe Review do
