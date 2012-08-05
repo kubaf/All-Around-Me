@@ -1,18 +1,12 @@
 require 'spec_helper'
 
 describe Review do
-  
   let(:user) {Factory.create(:user)}
+  let!(:review) {Factory.create(:review, user: user)}
+
+
   
-  before(:each) do
-    @attr = {
-      :name => "Review Name 1", 
-      :status => "active",
-      }
-    @review = user.reviews.build(@attr)
-  end
-  
-  subject {@review}
+  subject {review}
   
   it {should respond_to(:name)}
   it {should respond_to(:status)}
@@ -24,7 +18,7 @@ describe Review do
   it {should be_valid}
   
   describe "when user_id is not present" do
-    before {@review.user_id = nil}
+    before {review.user_id = nil}
     it {should_not be_valid}
   end
   
