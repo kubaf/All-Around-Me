@@ -1,0 +1,17 @@
+<% provide(:title, @review.name + " Reviewers") %>
+
+<ul class="breadcrumb">
+  <li>
+    <a href="#"><%= @current_user.name %></a> 
+    <span class="divider">/</span>
+  </li>
+  <li class="active">
+    <%= @review.name %>
+    <span class="divider">/</span>
+  </li>
+  <li>Reviewers</li>
+</ul>
+
+<div class="page-header">
+  <h1>Reviewers for <%= @review.name %></h1>
+</div>
