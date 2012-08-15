@@ -30,20 +30,32 @@ namespace :db do
       created = Date.today
       status_date = Date.today
       duration = 14
-      user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "pending", status_dt: status_date, duration: duration, created_at: created)
+      review = user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "pending", status_dt: status_date, duration: duration, created_at: created)
+      review_reviewer = ReviewReviewer.create!(user_id: "99", review_id: review.id, relationship: "manager")
+      review_reviewer = ReviewReviewer.create!(user_id: "98", review_id: review.id, relationship: "peer")
+      review_reviewer = ReviewReviewer.create!(user_id: "97", review_id: review.id, relationship: "peer")
       
       # Active
       created = Date.today - 9.days
       status_date = Date.today - 6.days
-      user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "active", status_dt: status_date, duration: duration, created_at: created)
+      review = user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "active", status_dt: status_date, duration: duration, created_at: created)
+      review_reviewer = ReviewReviewer.create!(user_id: "96", review_id: review.id, relationship: "manager")
+      review_reviewer = ReviewReviewer.create!(user_id: "95", review_id: review.id, relationship: "peer")
+      review_reviewer = ReviewReviewer.create!(user_id: "94", review_id: review.id, relationship: "peer")
       
       # Completed
       created = status_date = 1.year.ago
-      user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "completed", status_dt: status_date, duration: duration, created_at: created)
+      review = user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "completed", status_dt: status_date, duration: duration, created_at: created)
+      review_reviewer = ReviewReviewer.create!(user_id: "93", review_id: review.id, relationship: "manager")
+      review_reviewer = ReviewReviewer.create!(user_id: "92", review_id: review.id, relationship: "peer")
+      review_reviewer = ReviewReviewer.create!(user_id: "91", review_id: review.id, relationship: "peer")
       
       # Completed
       created = status_date = 2.years.ago
-      user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "expired", status_dt: status_date, duration: duration, created_at: created)
+      review = user.reviews.create!(name: "#{user.name} review #{created.strftime("%m/%d/%y")}", status: "expired", status_dt: status_date, duration: duration, created_at: created)
+      review_reviewer = ReviewReviewer.create!(user_id: "90", review_id: review.id, relationship: "manager")
+      review_reviewer = ReviewReviewer.create!(user_id: "89", review_id: review.id, relationship: "peer")
+      review_reviewer = ReviewReviewer.create!(user_id: "88", review_id: review.id, relationship: "peer")
 
     end 
   end
