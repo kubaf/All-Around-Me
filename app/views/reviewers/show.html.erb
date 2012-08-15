@@ -21,12 +21,10 @@
   <div class="span8">
     <div class="well">
       <% if @review.reviewers.any? %>
-        <ol class="reviewers">
-          <%= render @reviewers %>
-          <li>
-            <%= link_to "Create +", "new_reviewer_path", class: "btn btn-primary" %>
-          </li>
-        </ol>
+        <ul class="reviewers">
+          <%= render @review.reviewers %>
+        </ul>
+        <%= link_to "Add Reviewer +", "new_reviewer_path", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
