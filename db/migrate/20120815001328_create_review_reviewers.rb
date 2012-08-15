@@ -1,6 +1,6 @@
-class CreateReviewers < ActiveRecord::Migration
+class CreateReviewReviewers < ActiveRecord::Migration
   def change
-    create_table :reviewers do |t|
+    create_table :review_reviewers do |t|
       t.integer :user_id
       t.integer :review_id
       t.string :relationship

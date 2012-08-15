@@ -15,3 +15,19 @@
 <div class="page-header">
   <h1>Reviewers for <%= @review.name %></h1>
 </div>
+
+
+<div class="row">
+  <div class="span8">
+    <div class="well">
+      <% if @review.reviewers.any? %>
+        <ol class="reviewers">
+          <%= render @reviewers %>
+          <li>
+            <%= link_to "Create +", "new_reviewer_path", class: "btn btn-primary" %>
+          </li>
+        </ol>
+      <% end %>
+    </div>
+  </div>
+</div>

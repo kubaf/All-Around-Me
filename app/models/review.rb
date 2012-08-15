@@ -16,6 +16,9 @@ class Review < ActiveRecord::Base
   attr_accessible :name, :status, :status_dt, :duration, :created_at
   
   belongs_to :user
+  has_many :review_reviewers
+  #has_many :users, :through => :review_reviewers
+  has_many :reviewers, :through=>:review_reviewers,:source=>:user
   
   validates :user_id, presence: true
   validates :name, presence: true, length: {maximum: 50}

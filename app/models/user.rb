@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_secure_password
   
   has_many :reviews, dependent: :destroy
+  has_many :review_reviewers
 
   before_save { self.email.downcase! }
   before_save :generate_session_token
