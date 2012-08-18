@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818013055) do
+ActiveRecord::Schema.define(:version => 20120818182603) do
 
   create_table "people", :force => true do |t|
     t.string   "first_name"
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(:version => 20120818013055) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "people", ["email"], :name => "index_people_on_email", :unique => true
+  add_index "people", ["session_token"], :name => "index_people_on_session_token"
+
   create_table "review_reviewers", :force => true do |t|
     t.integer  "person_id"
     t.integer  "review_id"
@@ -33,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20120818013055) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  add_index "review_reviewers", ["review_id", "person_id"], :name => "index_review_reviewers_on_review_id_and_person_id", :unique => true
 
   create_table "reviews", :force => true do |t|
     t.string   "name"
@@ -43,19 +48,5 @@ ActiveRecord::Schema.define(:version => 20120818013055) do
     t.datetime "status_dt"
     t.integer  "duration"
   end
-
-  create_table "users_old", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.string   "password_digest"
-    t.string   "session_token"
-    t.boolean  "admin",           :default => false
-  end
-
-  add_index "users_old", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users_old", ["session_token"], :name => "index_users_on_session_token"
 
 end

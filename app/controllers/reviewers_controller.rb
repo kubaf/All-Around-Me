@@ -19,13 +19,9 @@ class ReviewersController < ApplicationController
     @review.review_reviewers.build(:person_id => @person.id, 
                                     :review_id => @review.id, 
                                     :relationship=>params[:review_reviewer][:relationship])
-    pp env
-    
-    pp @review.review_reviewers
-    
     if @review.save
       respond_to do |format|
-        format.html { redirect_to review_reviewers_path(@review), flash: {success: 'Reviewer ivited!'}}
+        format.html { redirect_to review_reviewers_path(@review), flash: {success: 'Reviewer invited!'}}
       end
     else
       respond_to do |format|
