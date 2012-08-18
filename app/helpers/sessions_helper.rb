@@ -44,8 +44,9 @@ module SessionsHelper
   end
   
   # filter that only allows you to edit your own reviews
-  def correct_review
-    @review = Review.find(params[:id])
+  def correct_review()
+    where = params["review_id"].blank? ? :id : :review_id 
+    @review = Review.find(params[where])
     redirect_to(root_path) unless current_user?(@review.user)
   end
   

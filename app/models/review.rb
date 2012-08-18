@@ -18,7 +18,7 @@ class Review < ActiveRecord::Base
   belongs_to :user
   has_many :review_reviewers
   #has_many :users, :through => :review_reviewers
-  has_many :reviewers, :through=>:review_reviewers,:source=>:user
+  has_many :reviewers, :through=>:review_reviewers,:source=>:person
   
   validates :user_id, presence: true
   validates :name, presence: true, length: {maximum: 50}

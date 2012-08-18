@@ -1,0 +1,60 @@
+<% provide(:title, @review.name + " Reviewers") %>
+
+<ul class="breadcrumb">
+  <li>
+    <a href="#"><%= @current_user.name %></a> 
+    <span class="divider">/</span>
+  </li>
+  <li class="active">
+    <%= @review.name %>
+    <span class="divider">/</span>
+  </li>
+  <li>Reviewers</li>
+</ul>
+
+<div class="page-header">
+  <h1>Reviewers for <%= @review.name %></h1>
+</div>
+
+
+<div class="row">
+  <div class="span8">
+    <div class="well">
+      <% if @review.reviewers.any? %>
+        <ul class="users">
+          <% 
+            @review.review_reviewers.each do |review_reviewer| 
+            %>
+            <%= render  :partial => "reviewer", 
+                        :locals => {
+                                    :reviewer => review_reviewer.person, 
+                                    :relationship => review_reviewer.relationship
+                                    } 
+            %>
+          <%end%>
+        </ul>
+      <% end %>
+      
+      <%= form_for([@review, @invited_reviewer], html: {class: "well"}) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        
+          <%= f.label :email, class: "" %>
+          <%= f.text_field :email, class: "" %>
+       
+
+        <%= fields_for @invited_review_reviewer do |f2| %>
+          <%= f2.label :relationship, class: "" %>
+          <%= f2.text_field :relationship, class: "" %>
+        <% end %>
+
+
+        <div class="form-actions">
+          <%= f.submit "Invite Reviewer", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      
+    
+    </div>
+  </div>
+</div>

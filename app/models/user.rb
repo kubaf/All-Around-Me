@@ -16,7 +16,7 @@
 require 'digest'
 
 # User.create!(first_name: "Kuba", last_name: "FSomething", email: "abc@def.com", password: "foobar", password_confirmation: "foobar")
-class User < ActiveRecord::Base
+class User < Person
   
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
 
