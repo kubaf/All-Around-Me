@@ -27,7 +27,7 @@ class User < Person
   has_many :reviews, dependent: :destroy
   has_many :review_reviewers
 
-  before_save { self.email.downcase! }
+  
   before_save :generate_session_token
 
 
@@ -36,20 +36,12 @@ class User < Person
   validates :last_name,  :presence=>true,
                          :length => {:maximum =>50}
 
-  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, :presence => true,
-                    :format => {:with => email_regex},
-                    :uniqueness => {:case_sensitive => false}
+  
                     
   validates :password,  :length => {:within => 6..254}
                         
   validates :password_confirmation, :presence => true
   
-                        
-  
-  def name
-    return "#{first_name} #{last_name}"
-  end
   
   private
   

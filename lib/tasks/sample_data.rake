@@ -14,13 +14,12 @@ namespace :db do
       first_name = Faker::Name.first_name
       last_name = Faker::Name.last_name
       email = "fake-#{n+1}@email.com"
-      password = "password"
       User.create!(
         first_name:   first_name,
         last_name:    last_name,
         email:        email,
-        password:     password,
-        password_confirmation: password
+        password:     "foobar",
+        password_confirmation: "foobar"
       )
     end
     
