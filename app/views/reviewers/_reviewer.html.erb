@@ -1,6 +1,9 @@
 
+<% if reviewer %>
 <li>
   <%= gravatar_for reviewer, size: 32 %>
-  <%= reviewer.name %>
+  <%= reviewer.name  %>
+  <%= reviewer.email  %>
   <%= relationship.humanize %>
 </li>
+<%end%>

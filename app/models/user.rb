@@ -1,21 +1,7 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id              :integer          not null, primary key
-#  first_name      :string(255)
-#  last_name       :string(255)
-#  email           :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  password_digest :string(255)
-#  session_token   :string(255)
-#  admin           :boolean          default(FALSE)
-#
 
+# For password stuff
 require 'digest'
 
-# User.create!(first_name: "Kuba", last_name: "FSomething", email: "abc@def.com", password: "foobar", password_confirmation: "foobar")
 class User < Person
   
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
@@ -25,6 +11,7 @@ class User < Person
   has_secure_password
   
   has_many :reviews, dependent: :destroy
+  
   has_many :review_reviewers
 
   

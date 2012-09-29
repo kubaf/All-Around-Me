@@ -13,12 +13,22 @@
 #
 
 class Review < ActiveRecord::Base
-  attr_accessible :name, :status, :status_dt, :duration, :created_at
+  attr_accessible :name, :status, :status_dt, :duration, :created_at, :review_reviewers_attributes
   
+  # This is the user who is being reviewed
   belongs_to :user
-  has_many :review_reviewers
-  #has_many :users, :through => :review_reviewers
-  has_many :reviewers, :through=>:review_reviewers,:source=>:person
+  
+  
+  has_many :review_reviewers, :dependent => :destroy
+  has_many :reviewers, :through=>:review_reviewers,:source=>:reviewer, :dependent=>:destroy
+  
+  
+  accepts_nested_attributes_for :reviewers, :allow_destroy => true
+  accepts_nested_attributes_for :review_reviewers, :allow_destroy => true
+  
+  validates_associated :review_reviewers
+  
+  
   
   validates :user_id, presence: true
   validates :name, presence: true, length: {maximum: 50}
@@ -29,6 +39,9 @@ class Review < ActiveRecord::Base
   
   
   default_scope order: 'reviews.created_at DESC'
+  
+ 
+  
   
   def active?
     return status == "active"

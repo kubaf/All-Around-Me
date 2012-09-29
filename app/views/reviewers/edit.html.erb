@@ -27,7 +27,7 @@
             %>
             <%= render  :partial => "reviewer", 
                         :locals => {
-                                    :reviewer => review_reviewer.reviewer, 
+                                    :reviewer => review_reviewer.person, 
                                     :relationship => review_reviewer.relationship
                                     } 
             %>
@@ -35,25 +35,20 @@
         </ul>
       <% end %>
       
-      <%= nested_form_for(@review, html: {class: "well"}) do |f| %>
+      <%= form_for([@review, @reviewer], html: {class: "well"}) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
 
         
+          <%= f.label :email, class: "" %>
+          <%= f.text_field :email, class: "" %>
+       
 
-        <%= f.fields_for :review_reviewers, 
-                f.object.review_reviewers.empty? ? 
-                f.object.review_reviewers.build :
-                :review_reviewers do |f2| %>
+        <%= fields_for @review_reviewer do |f2| %>
        
           <%= f2.label :relationship, class: "" %>
           <%= f2.text_field :relationship, class: "" %>
-          
-          <%= f2.fields_for :reviewer, f2.object.reviewer.nil? ? f2.object.build_reviewer : :reviewer do |f1| %>
-            <%= f1.label :email, class: "" %>
-            <%= f1.text_field :email, class: "" %>
-         <% end %>
         <% end %>
-        <%= f.link_to_add "Add a Reviewer", :review_reviewers %>
+
 
         <div class="form-actions">
           <%= f.submit "Invite Reviewer", class: "btn btn-primary" %>
