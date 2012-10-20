@@ -2,8 +2,8 @@ class ReviewersController < ApplicationController
   before_filter :signed_in_user
   before_filter :correct_review, only: [:edit, :update, :create]
   
-  def index
-    @review = Review.find(params[:review_id])
+  def edit
+    @review = Review.find(params[:id])
     @review.reviewers.build
     @review.review_reviewers.build
   end
@@ -12,12 +12,31 @@ class ReviewersController < ApplicationController
     render :index
   end
   
+  def update
+    render :index
+  end
   
+  def show
+    render :index
+  end
   
-  
-  
-  def dosomethingotherthancreate
+  def index
     @review = Review.find(params[:review_id])
+    @review.reviewers.build
+    @review.review_reviewers.build
+  end
+  
+  def new
+    @review = Review.find(params[:id])
+    @review.reviewers.build
+    @review.review_reviewers.build
+    render :index
+  end
+  
+  
+  
+  def update
+    @review = Review.find(params[:id])
     @invited_review_reviewer = ReviewReviewer.new
     
     # first figure out if person exists

@@ -24,13 +24,6 @@
         <ul class="users">
           <% 
             @review.review_reviewers.each do |review_reviewer| 
-              
-              puts "********* app/views/reviewers/edit.html.erb"
-              puts "review: "
-              pp @review
-              puts "review_reviewer"
-              pp review_reviewer
-              
             %>
             <%= render  :partial => "reviewer", 
                         :locals => {
@@ -42,26 +35,25 @@
         </ul>
       <% end %>
       
-      <%= nested_form_for(@review, url: edit_reviewer_path(@review), html: {class: "well"}) do |f| %>
+      <%= nested_form_for(@review ,html: {class: "well"}) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
 
-          <%= f.fields_for :review_reviewers, 
-                f.object.review_reviewers.empty? ? 
-                f.object.review_reviewers.build : 
-                :review_reviewers do |review_reviewer_form| %>
-          
-            <%= review_reviewer_form.label :relationship, class: "" %>
-            <%= review_reviewer_form.text_field :relationship, class: "" %>
-       
-            <%= review_reviewer_form.fields_for :reviewer do |reviewer_form| %>
-       
-       
-              <%= reviewer_form.label :email, class: "" %>
-              <%= reviewer_form.text_field :email, class: "" %>
-            <% end %>
-         
-        <% end %>
+        
 
+        <%= f.fields_for :review_reviewers, 
+                f.object.review_reviewers.empty? ? 
+                f.object.review_reviewers.build :
+                :review_reviewers do |f2| %>
+       
+          <%= f2.label :relationship, class: "" %>
+          <%= f2.text_field :relationship, class: "" %>
+          
+          <%= f2.fields_for :reviewer, f2.object.reviewer.nil? ? f2.object.build_reviewer : :reviewer do |f1| %>
+            <%= f1.label :email, class: "" %>
+            <%= f1.text_field :email, class: "" %>
+         <% end %>
+        <% end %>
+        <%= f.link_to_add "Add a Reviewer", :review_reviewers %>
 
         <div class="form-actions">
           <%= f.submit "Invite Reviewer", class: "btn btn-primary" %>

@@ -35,7 +35,7 @@
         </ul>
       <% end %>
       
-      <%= nested_form_for(@review, html: {class: "well"}) do |f| %>
+      <%= nested_form_for(@review, url: review_people_path(@review) ,html: {class: "well"}) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
 
         
