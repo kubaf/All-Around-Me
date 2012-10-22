@@ -9,7 +9,18 @@ class ReviewersController < ApplicationController
   end
   
   def create
-    render :index
+    @review = Review.find(params[:review_id])
+    @review_reviewer = @review.review_reviewers.build(params[:review_reviewer])
+    
+    if @review_reviewer.save
+      respond_to do |format|
+        format.html { redirect_to review_reviewers_path(@review), flash: {success: 'Reviewer invited!'}}
+      end
+    else
+      respond_to do |format|
+        format.html { render action: "new" }
+      end
+    end
   end
   
   def update
@@ -27,10 +38,11 @@ class ReviewersController < ApplicationController
   end
   
   def new
-    @review = Review.find(params[:id])
-    @review.reviewers.build
-    @review.review_reviewers.build
-    render :index
+    @review = Review.find(params[:review_id])
+    
+    @review_reviewer = ReviewReviewer.new
+    #@review.reviewers.build
+    #@review.review_reviewers.build
   end
   
   

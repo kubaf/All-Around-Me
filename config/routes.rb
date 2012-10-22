@@ -6,7 +6,8 @@ AllAroundMe::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :reviews do
     resources :review_reviewers
-    resources :people, :controller => "reviewers" #created because people is the superclass 
+    #resources :people, :controller => "reviewers" #created because people is the superclass 
+    resources :reviewers
   end
   
   resources :reviewers
