@@ -1,0 +1,18 @@
+<% if @breadcrumb  %>
+<ul class="breadcrumb">
+  <li>
+    <a href="<%= dashboard_path(@current_user) %>"><%= @current_user.name %></a> 
+    <span class="divider">/</span>
+  </li>
+<% @breadcrumb.each do |crumb| %>
+  <% unless crumb==@breadcrumb.last then %>
+  <li class="active">
+    <a href="<%= crumb[:link] %>"><%= crumb[:text]%></a>
+    <span class="divider">/</span>
+  </li>
+  <% else %>
+  <li><%= crumb[:text]%></li>
+  <% end %>
+<% end %>
+</ul>
+<% end %>

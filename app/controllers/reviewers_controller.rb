@@ -6,11 +6,21 @@ class ReviewersController < ApplicationController
     @review = Review.find(params[:id])
     @review.reviewers.build
     @review.review_reviewers.build
+    
+    @breadcrumb = [
+        {link: review_path(@review), text: @review.name},
+        {text: "Edit Reviewers"}
+      ]
   end
   
   def create
     @review = Review.find(params[:review_id])
     @review_reviewer = @review.review_reviewers.build(params[:review_reviewer])
+    
+    @breadcrumb = [
+        {link: review_path(@review), text: @review.name},
+        {text: "Add Reviewer"}
+      ]
     
     if @review_reviewer.save
       respond_to do |format|
@@ -33,14 +43,21 @@ class ReviewersController < ApplicationController
   
   def index
     @review = Review.find(params[:review_id])
-    @review.reviewers.build
-    @review.review_reviewers.build
+    
+    @breadcrumb = [
+        {link: review_path(@review), text: @review.name},
+        {text: "Reviewers"}
+      ]
   end
   
-  def new
-    @review = Review.find(params[:review_id])
-    
+  def new  
+    @review = Review.find(params[:review_id])  
     @review_reviewer = ReviewReviewer.new
+    
+    @breadcrumb = [
+        {link: "href", text: @review.name},
+        {text: "Add Reviewer"}
+      ]
     #@review.reviewers.build
     #@review.review_reviewers.build
   end

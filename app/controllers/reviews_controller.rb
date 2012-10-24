@@ -19,10 +19,18 @@ class ReviewsController < ApplicationController
   
   def new
     @review = Review.new
+    
+    @breadcrumb = [
+        {text: "Create Review"}
+      ]
   end
   
   def edit
     @review = current_user.reviews.find(params[:id])
+    
+    @breadcrumb = [
+        {text: @review.name}
+      ]
   end
   
   def update

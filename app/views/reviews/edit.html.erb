@@ -1,16 +1,6 @@
 <% provide(:title, @review.name)%>
 
-<ul class="breadcrumb">
-  <li>
-    <a href="#"><%= @current_user.name %></a> 
-    <span class="divider">/</span>
-  </li>
-  <li>
-    <%= link_to "Dashboard", dashboard_path(@current_user) %>
-    <span class="divider">/</span>
-  </li>
-  <li class="active"><%= @review.name %></li>
-</ul>
+<%= render 'shared/breadcrumb' %>
 
 <div class="page-header">
   <h1>Edit Review</h1>
