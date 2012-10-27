@@ -14,8 +14,28 @@ class ReviewersController < ApplicationController
   end
   
   def create
+    puts "************** inviting reviewer ****************"
+    
+    
     @review = Review.find(params[:review_id])
-    @review_reviewer = @review.review_reviewers.build(params[:review_reviewer])
+    
+    
+    @reviewer = Person.find_by_email(params[:review_reviewer][:reviewer_attributes][:email])
+    if @reviewer.nil?
+      @reviewer = Person.create(params[:review_reviewer][:reviewer_attributes])
+    end
+    
+    @review_reviewer = ReviewReviewer.create(review_id: @review.id, person_id: @reviewer.id, relationship: params[:review_reviewer][:relationship])
+    @review.save
+      
+      
+      
+      
+    #@review_reviewer = @review.review_reviewers.build(params[:review_reviewer])
+    
+    
+    
+    
     
     @breadcrumb = [
         {link: review_path(@review), text: @review.name},
