@@ -47,11 +47,13 @@ class UsersController < ApplicationController
     
     @user = Person.find_by_email(params[:user][:email])
     
-    # DNE
+    # DNE: User does not exist, came fresh off the street
+    #     so we create a new one
     if @user.nil?
       @user = User.new(params[:user])
     
-    # User
+    # Registered: User already has registered in the system with email/password
+    #           so we check if his password is same and sign him in
     elsif @user.registered?
       puts "@user.registered? #{@user.registered?}"
       
@@ -65,7 +67,8 @@ class UsersController < ApplicationController
       end
     end
 
-    # Person
+    # Person: User has been invited so we have his email but has not yet registered 
+    #         so we convert him to registered user
     @user.attributes = params[:user]
     @user.type="User"
     
