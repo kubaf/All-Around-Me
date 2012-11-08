@@ -55,13 +55,9 @@ class UsersController < ApplicationController
     # Registered: User already has registered in the system with email/password
     #           so we check if his password is same and sign him in
     elsif @user.registered?
-      puts "@user.registered? #{@user.registered?}"
-      
       if @user.authenticate(params[:user][:password])
         sign_in @user
-        puts "user signed in "
-        pp @current_user
-        redirect_to @user, flash: {success: 'Your have already registered!'} and return
+        redirect_to dashboard_path(@user), flash: {success: 'Your have already registered!'} and return
       else
         redirect_to signin_path, flash: {error: 'This user is already registered! Please sign in instead.'} and return
       end
@@ -76,7 +72,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         sign_in @user
-        format.html { redirect_to @user, flash: {success: 'Your registration was sucessful!'}}
+        format.html { redirect_to dashboard_path(@user), flash: {success: 'Your registration was sucessful!'}}
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
