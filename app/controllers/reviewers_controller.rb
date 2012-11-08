@@ -14,9 +14,6 @@ class ReviewersController < ApplicationController
   end
   
   def create
-    puts "************** inviting reviewer ****************"
-    
-    
     @review = Review.find(params[:review_id])
     
     
@@ -27,20 +24,12 @@ class ReviewersController < ApplicationController
     
     @review_reviewer = ReviewReviewer.create(review_id: @review.id, person_id: @reviewer.id, relationship: params[:review_reviewer][:relationship])
     @review.save
-      
-      
-      
-      
-    #@review_reviewer = @review.review_reviewers.build(params[:review_reviewer])
-    
-    
-    
-    
     
     @breadcrumb = [
-        {link: review_path(@review), text: @review.name},
-        {text: "Add Reviewer"}
-      ]
+      {link: review_path(@review), text: "Review: #{@review.name}"},
+      {link: review_reviewers_path(@review), text: "Reviewers"},
+      {text: "Add Reviewer"}
+    ]
     
     if @review_reviewer.save
       respond_to do |format|
@@ -75,11 +64,10 @@ class ReviewersController < ApplicationController
     @review_reviewer = ReviewReviewer.new
     
     @breadcrumb = [
-        {link: "href", text: @review.name},
-        {text: "Add Reviewer"}
-      ]
-    #@review.reviewers.build
-    #@review.review_reviewers.build
+      {link: review_path(@review), text: "Review: #{@review.name}"},
+      {link: review_reviewers_path(@review), text: "Reviewers"},
+      {text: "Add Reviewer"}
+    ]
   end
   
   

@@ -44,8 +44,32 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    
+    @user = Person.find_by_email(params[:user][:email])
+    
+    # DNE
+    if @user.nil?
+      @user = User.new(params[:user])
+    
+    # User
+    elsif @user.registered?
+      puts "@user.registered? #{@user.registered?}"
+      
+      if @user.authenticate(params[:user][:password])
+        sign_in @user
+        puts "user signed in "
+        pp @current_user
+        redirect_to @user, flash: {success: 'Your have already registered!'} and return
+      else
+        redirect_to signin_path, flash: {error: 'This user is already registered! Please sign in instead.'} and return
+      end
+    end
 
+    # Person
+    @user.attributes = params[:user]
+    @user.type="User"
+    
+    
     respond_to do |format|
       if @user.save
         sign_in @user
