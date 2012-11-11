@@ -61,13 +61,16 @@ class UsersController < ApplicationController
       else
         redirect_to signin_path, flash: {error: 'This user is already registered! Please sign in instead.'} and return
       end
-    end
-
+      
     # Person: User has been invited so we have his email but has not yet registered 
-    #         so we convert him to registered user
-    @user.attributes = params[:user]
-    @user.type="User"
-    
+    #         so we convert him to registered user  
+    else
+      @user.type="User"
+      @user.save!
+      
+      @user = User.find_by_email(params[:user][:email])
+      @user.attributes = params[:user]
+    end
     
     respond_to do |format|
       if @user.save

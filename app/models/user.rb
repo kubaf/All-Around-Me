@@ -34,7 +34,6 @@ class User < Person
   
     def generate_session_token
       self.session_token = SecureRandom.urlsafe_base64
-      puts "Generated session token #{self.session_token}"
     end
 
 
