@@ -10,10 +10,15 @@ class User < Person
   # https://github.com/rails/rails/blob/master/activemodel/lib/active_model/secure_password.rb
   has_secure_password
   
+  # These are the reviews of me
   has_many :reviews, dependent: :destroy
-  
   has_many :review_reviewers
 
+
+  # These are reviews of other people that I'm participating in 
+  # ??
+  has_many :others_reviews, :through => :review_reviewers, :source => :review, :foreign_key=>"person_id"
+  
   
   before_save :generate_session_token
 

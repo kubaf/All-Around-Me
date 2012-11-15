@@ -18,7 +18,6 @@ class Review < ActiveRecord::Base
   # This is the user who is being reviewed
   belongs_to :user
   
-  
   has_many :review_reviewers, :dependent => :destroy
   has_many :reviewers, :through=>:review_reviewers,:source=>:reviewer, :dependent=>:destroy
   

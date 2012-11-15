@@ -1,5 +1,4 @@
 class Person < ActiveRecord::Base
-  #attr_accessible :admin, :email, :first_name, :last_name, :password, :password_confirmation, :password_digest, :session_token, :type
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
   
   before_save :downcase_email
