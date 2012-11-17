@@ -32,14 +32,14 @@ describe Review do
   it {should be_valid}
   
   describe "when user_id is not present" do
-    before {review.user_id = nil}
+    before {review.person_id = nil}
     it {should_not be_valid}
   end
   
   describe "accessible attributes" do
-    it "should not allow access to user_id" do
+    it "should not allow access to person_id" do
       expect do
-        Review.new(user_id: user.id)
+        Review.new(person_id: user.id)
       end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
   end

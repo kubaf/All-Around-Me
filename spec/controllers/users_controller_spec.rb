@@ -72,9 +72,9 @@ describe UsersController do
         assigns(:user).should be_persisted
       end
 
-      it "redirects to the created user" do
+      it "redirects to the created user's dashboard" do
         post :create, :user => valid_attributes
-        response.should redirect_to(User.last)
+        response.should redirect_to(dashboard_url(User.last))
       end
     end
 

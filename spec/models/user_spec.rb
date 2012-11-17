@@ -82,19 +82,30 @@ describe User do
   describe "password validations" do
     
     describe "password validations" do
+      before(:each) do
+        @attr = {
+          :first_name => "First", 
+          :last_name => "Last", 
+          :email => "user2@example.com"
+          }
+      end
+      
 
       describe "when password is not present" do
-        before {@user.password = @user.password_confirmation = ""}
+        before { @attr[:password] = @attr[:password_confirmation] = ""}
+        before { @user = User.new(@attr)}
         it {should_not be_valid}
       end
       
       describe "when password is blank" do
-        before {@user.password = @user.password_confirmation = " "}
+        before {@attr[:password] = @attr[:password_confirmation] = " "}
+        before { @user = User.new(@attr)}
         it {should_not be_valid}
       end
       
       describe "when password confirmation is nil" do
-        before {@user.password_confirmation = nil}
+        before {@attr[:password_confirmation] = nil}
+        before { @user = User.new(@attr)}
         it {should_not be_valid}
       end
 

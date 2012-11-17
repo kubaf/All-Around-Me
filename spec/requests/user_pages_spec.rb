@@ -119,7 +119,16 @@ describe "User pages" do
     end
     
     describe "with invalid information" do
-      before {click_button "Save changes"}
+      let(:new_first_name) {""}
+      let(:new_last_name) {""}
+      let(:new_email) {""}
+      
+      before do
+        fill_in "First name",    with: new_first_name
+        fill_in "Last name",     with: new_last_name
+        fill_in "Email",         with: new_email
+        click_button "Save changes"
+      end
       
       it {should have_content('error')}
     end
