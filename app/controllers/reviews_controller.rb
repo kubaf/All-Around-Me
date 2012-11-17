@@ -1,9 +1,15 @@
 class ReviewsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :correct_review, only: [:edit, :update]
+  before_filter :correct_review, only: [:edit, :update, :show]
+  
+  def show
+    @breadcrumb = [
+        {text: @review.name}
+      ]    
+  end
   
   def create
-    @review = current_user.reviews.build(params[:review])
+    @review = current_user.reviews_of_me.build(params[:review])
     @review.update_status('pending')
     
     if @review.save
@@ -26,10 +32,11 @@ class ReviewsController < ApplicationController
   end
   
   def edit
-    @review = current_user.reviews.find(params[:id])
+    @review = current_user.reviews_of_me.find(params[:id])
     
     @breadcrumb = [
-        {text: @review.name}
+        {link: review_path(@review), text: @review.name},
+        {text: "Edit"}
       ]
   end
   

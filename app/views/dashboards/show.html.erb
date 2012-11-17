@@ -10,9 +10,9 @@
   <div class="span8">
     <div class="well">
       <h2>My Reviews <small>Reviews of me</small></h2>
-      <% if @user.reviews.any? %>
+      <% if @user.reviews_of_me.any? %>
         <ol class="reviews">
-          <%= render @reviews %>
+          <%= render partial: "review_of_me", collection: @reviews_of_me, as: :review %>
         </ol>
       <% end %>
       <%= link_to "Create +", new_review_path, class: "btn btn-primary" %>
@@ -21,9 +21,9 @@
 
     <div class="well">
       <h2>Reviewing <small>Who I am reviewing</small></h2>
-	  <% if @user.others_reviews.any? %>
+	  <% if @user.reviews_of_others.any? %>
         <ol class="reviews">
-          <%= render @others_reviews %>
+          <%= render partial: "review_of_others", collection: @reviews_of_others, as: :review %>
         </ol>
       <% end %>
     </div>

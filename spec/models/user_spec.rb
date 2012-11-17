@@ -40,7 +40,8 @@ describe User do
   it {should respond_to(:authenticate)}
   it {should respond_to(:session_token)}
   it {should respond_to(:admin)}
-  it {should respond_to(:reviews)}
+  it {should respond_to(:reviews_of_me)}
+  it {should respond_to(:reviews_of_others)}
 
   it {should be_valid}   
   it {should_not be_admin}
@@ -187,12 +188,12 @@ describe User do
     end
     
     it "should have the right reviews in the right order" do
-      @user.reviews.should == [newer_review, older_review]
+      @user.reviews_of_me.should == [newer_review, older_review]
     end
   end
   
   it "should destroy associated reviews" do
-    reviews = @user.reviews
+    reviews = @user.reviews_of_me
     @user.destroy
     reviews.each do |review|
       Review.find_by_id(review.id).should be_nil

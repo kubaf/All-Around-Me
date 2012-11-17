@@ -12,12 +12,12 @@ class User < Person
   
 
   # These are the reviews of me
-  has_many :reviews, dependent: :destroy, :foreign_key=>"person_id"
+  has_many :reviews_of_me, :class_name => "Review", dependent: :destroy, :foreign_key=>"person_id"
   has_many :review_reviewers, :foreign_key=>"person_id"
 
 
   # These are reviews of other people that I'm participating in 
-  has_many :others_reviews, :through => :review_reviewers, :source => :review, :foreign_key=>"person_id"
+  has_many :reviews_of_others, :through => :review_reviewers, :source => :review, :foreign_key=>"person_id"
   
   
   before_save :generate_session_token
