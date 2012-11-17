@@ -5,6 +5,7 @@ class DashboardsController < ApplicationController
   def show
     @user = User.find(params[:id])
     @reviews = @user.reviews
+    @others_reviews = @user.others_reviews
     
     @breadcrumb = [
         {text: "Dashboard"}

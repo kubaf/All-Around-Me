@@ -18,6 +18,7 @@ class Review < ActiveRecord::Base
   # This is the user who is being reviewed
   belongs_to :user, :foreign_key=>'person_id'
   
+  # These are the people reviewing
   has_many :review_reviewers, :dependent => :destroy
   has_many :reviewers, :through=>:review_reviewers,:source=>:reviewer, :dependent=>:destroy
   
@@ -27,19 +28,14 @@ class Review < ActiveRecord::Base
   
   validates_associated :review_reviewers
   
-  
-  
-  validates :user_id, presence: true
+  validates :person_id, presence: true
   validates :name, presence: true, length: {maximum: 50}
   validates :duration, presence: true
   validates_numericality_of :duration, only_integer: true, message: "can only be a whole number"
   validates_inclusion_of :duration, in: 1..31, message: "can only be between 1 and 31 days"
 
   
-  
   default_scope order: 'reviews.created_at DESC'
-  
- 
   
   
   def active?

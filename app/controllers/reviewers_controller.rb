@@ -16,14 +16,16 @@ class ReviewersController < ApplicationController
   def create
     @review = Review.find(params[:review_id])
     
-    
+    # This will pull back either a Person or a User object depending on type attribute
     @reviewer = Person.find_by_email(params[:review_reviewer][:reviewer_attributes][:email])
+    
     if @reviewer.nil?
       @reviewer = Person.create(params[:review_reviewer][:reviewer_attributes])
     end
-    
+        
     @review_reviewer = ReviewReviewer.create(review_id: @review.id, person_id: @reviewer.id, relationship: params[:review_reviewer][:relationship])
-    @review.save
+    
+    # I'm not sure why we need this here: @review.save!
     
     @breadcrumb = [
       {link: review_path(@review), text: "Review: #{@review.name}"},

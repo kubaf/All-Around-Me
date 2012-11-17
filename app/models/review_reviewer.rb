@@ -8,9 +8,15 @@ class ReviewReviewer < ActiveRecord::Base
   
   validates_associated :reviewer
   
+  
   validates_uniqueness_of :person_id, :scope => :review_id, :message => "The same person cannot be reinvited" 
   
   validates_presence_of :relationship
+
+  # This can happen if you fail to create a valid person, then associate that
+  # record in a review_reviewer row 
+  validates_presence_of :person_id, message: "is required to be associated with a review"
   
+  validates_presence_of :review_id, message: "is required to be associated with a reviewer"
   
 end

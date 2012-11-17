@@ -21,7 +21,11 @@
 
     <div class="well">
       <h2>Reviewing <small>Who I am reviewing</small></h2>
-
+	  <% if @user.others_reviews.any? %>
+        <ol class="reviews">
+          <%= render @others_reviews %>
+        </ol>
+      <% end %>
     </div>
   </div>
 </div>
