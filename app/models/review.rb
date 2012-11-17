@@ -16,7 +16,7 @@ class Review < ActiveRecord::Base
   attr_accessible :name, :status, :status_dt, :duration, :created_at, :review_reviewers_attributes
   
   # This is the user who is being reviewed
-  belongs_to :user
+  belongs_to :user, :foreign_key=>'person_id'
   
   has_many :review_reviewers, :dependent => :destroy
   has_many :reviewers, :through=>:review_reviewers,:source=>:reviewer, :dependent=>:destroy
