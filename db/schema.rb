@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121117045137) do
+ActiveRecord::Schema.define(:version => 20121202191409) do
+
+  create_table "mc_question_choices", :force => true do |t|
+    t.integer  "question_id",         :null => false
+    t.string   "type"
+    t.integer  "choice_number",       :null => false
+    t.string   "choice_text"
+    t.integer  "choice_range_number"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
   create_table "people", :force => true do |t|
     t.string   "first_name"
@@ -27,6 +37,34 @@ ActiveRecord::Schema.define(:version => 20121117045137) do
 
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
   add_index "people", ["session_token"], :name => "index_people_on_session_token"
+
+  create_table "questions", :force => true do |t|
+    t.string   "type"
+    t.text     "question_text",                    :null => false
+    t.integer  "order"
+    t.integer  "min_valid_choices", :default => 1
+    t.integer  "max_valid_choices", :default => 1
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "responses", :force => true do |t|
+    t.string   "type"
+    t.text     "response_text"
+    t.integer  "mc_question_choice_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  create_table "review_question_responses", :force => true do |t|
+    t.integer  "review_id",   :null => false
+    t.integer  "question_id", :null => false
+    t.integer  "response_id", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "review_question_responses", ["review_id", "question_id", "response_id"], :name => "review_question_responses_rev_q_resp_ids", :unique => true
 
   create_table "review_reviewers", :force => true do |t|
     t.integer  "person_id",    :null => false
