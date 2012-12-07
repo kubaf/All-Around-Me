@@ -18,10 +18,4 @@ class Multiple_Choice_Question < Question
     end
   end
   
-  def must_have_at_least_one_choice
-    unless choices.count > 0
-      errors.add(:choices, "must have at least one choice")
-    end
-  end
-  
 end
