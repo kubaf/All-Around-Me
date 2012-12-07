@@ -1,14 +1,21 @@
 require 'spec_helper'
 
-describe Question do
+describe Multiple_Choice_Question do
   
   before(:each) do
     @attr = {
       question_text: "Why did the chicken cross the road?",
       order: 1
     }
+    @choice = {
+      choice_number: 1,
+      choice_text: "To get to the other side"
+    }
     
-    @question = Question.create!(@attr)
+    
+    @question = Multiple_Choice_Question.new(@attr)
+    @question.choices.build(@choice)
+    @question.save!
   end
   
   subject {@question}
@@ -20,6 +27,19 @@ describe Question do
   it {should respond_to(:max_valid_choices)}
   
   it {should be_valid}
+  
+  describe "type" do
+    it "should be a Multiple_Choice_Question" do
+      @question.type.should == @question.class.name
+    end
+  end
+  
+  describe "max_valid_choices_must_be_greater_than_min_valid_choices" do
+    before {@question.min_valid_choices=999}
+    before {@question.max_valid_choices=1}
+    it {should_not be_valid}
+  end
+  
   
   describe "question text" do
     describe "when empty" do
