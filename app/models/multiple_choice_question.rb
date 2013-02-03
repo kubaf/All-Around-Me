@@ -1,6 +1,6 @@
 class Multiple_Choice_Question < Question
   
-  attr_accessible :max_valid_choices, :min_valid_choices
+  attr_accessible :max_valid_choices, :min_valid_choices, :choice_attributes
   
   has_many :choices, :foreign_key=>"question_id", dependent: :destroy
   
