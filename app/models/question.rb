@@ -3,4 +3,6 @@ class Question < ActiveRecord::Base
   
   validates_presence_of :question_text
   validates_uniqueness_of :order
+  
+  default_scope order('`order` ASC')
 end

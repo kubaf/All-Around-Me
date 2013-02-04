@@ -8,6 +8,9 @@ AllAroundMe::Application.routes.draw do
     resources :review_reviewers
     #resources :people, :controller => "reviewers" #created because people is the superclass 
     resources :reviewers
+    member do
+      get 'review'
+    end
   end
   
   resources :reviewers
