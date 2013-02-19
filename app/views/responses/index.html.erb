@@ -5,7 +5,13 @@
 <div class="page-header">
   <h1>Review</h1>
 </div>
-<% @questions.each do |question|  %>
+<% 
+  puts @review.review_question_responses
+
+  @review.review_question_responses.each do |question_response|  
+    question = question_response.question
+    response = question_response.response
+%>
 <div class="row">
   <div class="span8">
     <p><%= question.order %>. <%= question.question_text %></p>

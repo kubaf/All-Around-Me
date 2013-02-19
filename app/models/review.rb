@@ -13,7 +13,7 @@
 #
 
 class Review < ActiveRecord::Base
-  attr_accessible :name, :status, :status_dt, :duration, :created_at, :review_reviewers_attributes
+  attr_accessible :name, :status, :status_dt, :duration, :created_at, :review_reviewers_attributes, :review_question_responses_attributes, :responses_attributes
   
   # This is the user who is being reviewed
   belongs_to :user, :foreign_key=>'person_id'
@@ -36,12 +36,14 @@ class Review < ActiveRecord::Base
 
   
   has_many :review_question_responses
+  accepts_nested_attributes_for :review_question_responses, :allow_destroy => true
   
   # These are the questions asked during a review
   has_many :questions, through: :review_question_responses
   
   # These are the answers to the questions asked
   has_many :responses, through: :review_question_responses
+  accepts_nested_attributes_for :responses, :allow_destroy => true
   
   
   
