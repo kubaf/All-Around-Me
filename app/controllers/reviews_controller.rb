@@ -50,5 +50,16 @@ class ReviewsController < ApplicationController
     end
   end
   
+  def review
+    @review = Review.find(params[:id])
+    @questions = Question.all
+    
+    
+    @breadcrumb = [
+      {link: review_path(@review), text: @review.name},
+      {text: "Review"}
+    ]
+  end
+  
   
 end

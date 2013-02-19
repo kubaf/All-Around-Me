@@ -1,0 +1,28 @@
+<% provide(:title, @review.name)%>
+
+<%= render 'shared/breadcrumb' %>
+
+<div class="page-header">
+  <h1>Review</h1>
+</div>
+<% 
+  puts @review.review_question_responses
+
+  @review.review_question_responses.each do |question_response|  
+    question = question_response.question
+    response = question_response.response
+%>
+<div class="row">
+  <div class="span8">
+    <p><%= question.order %>. <%= question.question_text %></p>
+    <% if question.is_a?(Multiple_Choice_Question) && question.choices %>
+    <ul>
+      <% question.choices.each do |choice| %>
+      <li><%= choice.choice_number %>. <%= choice.choice_text %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+</div>
+<% end %>
+

@@ -1,6 +1,6 @@
 <li class="review-row">
   <div class="pull-left">
-    <div class="content"><%= link_to review.name, review_path(review) %></div>
+    <div class="content"><%= link_to review.name, review_responses_path(review) %></div>
     <% if review.active? %>
       <div class="timestamp">
         Expires in <%= distance_of_time_in_words(Time.now, review.expiry) %>.
