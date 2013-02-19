@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207045344) do
+ActiveRecord::Schema.define(:version => 20130219060703) do
 
   create_table "choices", :force => true do |t|
     t.integer  "question_id",         :null => false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20121207045344) do
   create_table "questions", :force => true do |t|
     t.string   "type"
     t.text     "question_text",                    :null => false
-    t.integer  "order",                            :null => false
+    t.integer  "question_order",                   :null => false
     t.integer  "min_valid_choices", :default => 1
     t.integer  "max_valid_choices", :default => 1
     t.datetime "created_at",                       :null => false

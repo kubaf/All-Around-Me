@@ -14,7 +14,7 @@
 %>
 <div class="row">
   <div class="span8">
-    <p><%= question.order %>. <%= question.question_text %></p>
+    <p><%= question.question_order %>. <%= question.question_text %></p>
     <% if question.is_a?(Multiple_Choice_Question) && question.choices %>
     <ul>
       <% question.choices.each do |choice| %>
