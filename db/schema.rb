@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219060703) do
+ActiveRecord::Schema.define(:version => 20130402041208) do
 
   create_table "choices", :force => true do |t|
     t.integer  "question_id",         :null => false
@@ -52,19 +52,10 @@ ActiveRecord::Schema.define(:version => 20130219060703) do
     t.string   "type"
     t.text     "response_text"
     t.integer  "mc_question_choice_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "review_user_response_set_id"
   end
-
-  create_table "review_question_responses", :force => true do |t|
-    t.integer  "review_id",   :null => false
-    t.integer  "question_id", :null => false
-    t.integer  "response_id", :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "review_question_responses", ["review_id", "question_id", "response_id"], :name => "review_question_responses_rev_q_resp_ids", :unique => true
 
   create_table "review_reviewers", :force => true do |t|
     t.integer  "person_id",    :null => false
@@ -75,6 +66,15 @@ ActiveRecord::Schema.define(:version => 20130219060703) do
   end
 
   add_index "review_reviewers", ["review_id", "person_id"], :name => "index_review_reviewers_on_review_id_and_person_id", :unique => true
+
+  create_table "review_user_response_sets", :force => true do |t|
+    t.integer  "review_id"
+    t.integer  "person_id"
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "reviews", :force => true do |t|
     t.string   "name"
