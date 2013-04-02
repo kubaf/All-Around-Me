@@ -35,19 +35,12 @@ class Review < ActiveRecord::Base
   validates_inclusion_of :duration, in: 1..31, message: "can only be between 1 and 31 days"
 
   
-  has_many :review_question_responses
-  accepts_nested_attributes_for :review_question_responses, :allow_destroy => true
+  has_many :review_question_response_sets
+  accepts_nested_attributes_for :review_question_response_sets, :allow_destroy => true
   
-  # These are the questions asked during a review
-  has_many :questions, through: :review_question_responses
-  
-  # These are the answers to the questions asked
-  has_many :responses, through: :review_question_responses
-  accepts_nested_attributes_for :responses, :allow_destroy => true
-  
-  
-  
-  
+  # May have many questions through review sections later, 
+  # and later still through review specific questions
+    
   
   default_scope order: 'reviews.created_at DESC'
   
